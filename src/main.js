@@ -102,7 +102,7 @@ async function getTrendingMovies() {
     createMovies(movies, genericSection);
     
 }
-getMovieById
+
 async function getMovieById(id) {
     const {data: movie} = await api('/movie/' + id);
     
@@ -120,4 +120,11 @@ async function getMovieById(id) {
 
     createCategories(movie.genres, movieDetailCategoriesList);
     
+    getRelatedMoviesId(id);
+}
+
+async function getRelatedMoviesId(id) {
+     const {data} = await api('/movie/' + id + '/similar');
+     const relatedMovies = data.results;
+     createMovies (relatedMovies, relatedMoviesContainer)
 }
